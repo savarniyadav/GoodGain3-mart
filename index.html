@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<h1><b><center><i>welcome to GoodGain mart</i></center></b></h1>
+<h2><center>Your trusted destination for quality clothes, electronics & accessories — Shopping made golden!</center></h2>
+  <title>GoodGain Mart</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: black;
+      color: goldenrod;
+    }
+    header {
+      text-align: center;
+      padding: 30px 0;
+      background-color: #000;
+      font-size: 28px;
+      font-weight: bold;
+    }
+    nav {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      background-color: #111;
+      padding: 15px 0;
+      font-size: 20px;
+      cursor: pointer;
+    }
+    .menu-item:hover {
+      color: white;
+    }
+    .subcategory {
+      display: none;
+      padding: 20px;
+      text-align: center;
+      background-color: #0d0d0d;
+      border-top: 2px solid goldenrod;
+      font-size: 18px;
+      line-height: 30px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+
+  <nav>
+    <div class="menu-item" data-target="home" onclick="showMenu('home')">Home</div>
+    <div class="menu-item" data-target="clothes" onclick="showMenu('clothes')">Clothes</div>
+    <div class="menu-item" data-target="electronics" onclick="showMenu('electronics')">Electronics</div>
+    <div class="menu-item" data-target="accessories" onclick="showMenu('accessories')">Accessories</div>
+    <div class="menu-item" data-target="aboutus" onclick="showMenu('aboutus')">About Us</div>
+    <div class="menu-item" data-target="whatsapp" onclick="showMenu('whatsapp')">WhatsApp</div>
+  </nav>
+
+  
+
+  <!-- HOME -->
+  <div id="home" class="subcategory">GoodGain Mart — Your One‑Stop Golden Store!</div>
+
+  <!-- CLOTHES -->
+  <div id="clothes" class="subcategory">
+    <h2>Clothes Collection</h2>
+    Men's T‑Shirts<br>
+    Men's Jeans<br>
+    Women's Tops<br>
+    Women's Sarees<br>
+    Kids Wear<br>
+    Boys Fashion<br>
+    Girls Dresses<br>
+    Girls Western Wear
+  </div>
+
+  <!-- ELECTRONICS -->
+  <div id="electronics" class="subcategory">
+    <h2>Electronics</h2>
+    Smartphones<br>
+    Headphones<br>
+    Smartwatches<br>
+    Bluetooth Speakers<br>
+    Powerbanks
+  </div>
+
+  <!-- ACCESSORIES -->
+  <div id="accessories" class="subcategory">
+    <h2>Accessories</h2>
+    Men's Watches<br>
+    Women's Watches<br>
+    Wallets<br>
+    Bags<br>
+    Sunglasses<br>
+    Caps & Belts<br>
+    Girls Handbags<br>
+    Girls Hair Accessories<br>
+    Girls Jewelry
+  </div>
+
+  <script>
+    // RESET & SHOW FUNCTION
+    function openSection(target){
+      document.querySelectorAll('.subcategory').forEach(sec => sec.style.display = 'none');
+      document.getElementById(target).style.display = 'block';
+    }
+
+    // CLICK FUNCTIONALITY
+    function showMenu(menu){ openSection(menu); }
+
+    // HOVER FUNCTIONALITY
+    document.addEventListener('DOMContentLoaded', () => {
+      const items = document.querySelectorAll('.menu-item');
+      items.forEach(item => {
+        item.addEventListener('mouseenter', () => {
+          const target = item.getAttribute('data-target');
+          if(target){ openSection(target); }
+        });
+      });
+    });
+  </script>
+
+  <!-- ABOUT US -->
+  <div id="aboutus" class="subcategory" style="margin-top:200px;">
+    <h2>About Us</h2>
+    GoodGain Mart ek premium online store hai jaha aapko Clothing, Accessories aur Electronics ki best quality products milti hain.
+  </div>
+
+  <!-- WHATSAPP -->
+  <div id="whatsapp" class="subcategory" style="margin-top:100px;">
+    <h2>WhatsApp Contact</h2>
+    Message us on WhatsApp: <b>797121542</b>
+  </div>
+
+  <!-- ADMIN ACCESS ICON -->
+  <div id="adminIcon" onclick="openAdmin()" style="position:fixed; bottom:20px; right:20px; width:50px; height:50px; background:goldenrod; color:black; border-radius:50%; display:flex; align-items:center; justify-content:center; font-weight:bold; cursor:pointer; box-shadow:0 0 10px goldenrod;">A</div>
+
+  <!-- ADMIN PANEL (HIDDEN) -->
+  <div id="adminPanel" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.98); color:goldenrod; padding:20px; overflow-y:auto; z-index:9999;">
+    <div style="display:flex; justify-content:space-between; align-items:center; gap:20px;">
+      <h1 style="margin:0;">Admin Dashboard — GoodGain Mart</h1>
+      <div>
+        <button id="adminLogoutBtn" style="padding:8px 12px; margin-right:10px; background:#111; color:goldenrod; border:1px solid goldenrod; border-radius:6px; cursor:pointer;">Logout</button>
+        <button onclick="closeAdmin()" style="padding:10px 20px; background:goldenrod; border:none; border-radius:8px; cursor:pointer; font-weight:bold;">Close</button>
+      </div>
+    </div>
+
+    <hr style="border-color:rgba(255,215,0,0.15)" />
+
+    <div style="display:grid; grid-template-columns: 1fr 1fr; gap:28px;">
+      <!-- Product Management -->
+      <section style="background:#0b0b0b; padding:18px; border-radius:10px;">
+        <h2>Product Management</h2>
+        <form id="productForm" style="display:flex; flex-direction:column; gap:8px;">
+          <input id="p_id" placeholder="Product ID (auto if blank)" />
+          <input id="p_name" placeholder="Product Name" required />
+          <select id="p_category">
+            <option value="clothes">Clothes</option>
+            <option value="electronics">Electronics</option>
+            <option value="accessories">Accessories</option>
+          </select>
+          <input id="p_price" placeholder="Price" type="number" required />
+          <input id="p_stock" placeholder="Stock qty" type="number" />
+          <input id="p_image" placeholder="Image URL (optional)" />
+          <div style="display:flex; gap:8px;">
+            <button type="button" onclick="addOrUpdateProduct()" style="padding:8px 12px; background:goldenrod; border:none; border-radius:6px; cursor:pointer;">Add / Update</button>
+            <button type="button" onclick="clearProductForm()" style="padding:8px 12px; background:#111; border:1px solid goldenrod; border-radius:6px; cursor:pointer;">Clear</button>
+          </div>
+        </form>
+
+        <h3 style="margin-top:16px">Products</h3>
+        <div id="productList" style="display:flex; flex-direction:column; gap:10px; max-height:340px; overflow:auto; padding-right:6px;"></div>
+      </section>
+
+      <!-- Orders & Customers -->
+      <section style="background:#0b0b0b; padding:18px; border-radius:10px;">
+        <h2>Orders & Customers</h2>
+        <div id="ordersList" style="max-height:480px; overflow:auto; display:flex; flex-direction:column; gap:10px;">No orders yet.</div>
+
+        <h3 style="margin-top:18px">Notifications</h3>
+        <div id="notifications" style="max-height:120px; overflow:auto;">No notifications.</div>
+      </section>
+    </div>
+
+    <hr style="border-color:rgba(255,215,0,0.08)" />
+
+    <p style="opacity:0.9;">Admin features use browser <code>localStorage</code> for demo. To connect a real database (Firebase / backend), paste your config into the <code>initFirebase()</code> area in the script below — a sample is included as commented code.</p>
+
+    <div style="margin-top:8px; font-size:13px; opacity:0.9">Security note: This demo stores admin access on the client for quick preview. For production, implement server-side authentication & secure storage.</div>
+
+  </div>
+
+  <script>
+    // ======= ADMIN ACCESS & AUTH ========
+    const ADMIN_PASSWORD = 'SY312005'; // provided by you
+    const adminIcon = document.getElementById('adminIcon');
+    const adminPanel = document.getElementById('adminPanel');
+
+    function openAdmin(){
+      let pass = prompt('Enter Password to Access Admin Panel');
+      if(pass === ADMIN_PASSWORD){
+        adminPanel.style.display = 'block';
+        loadAllData();
+      } else {
+        alert('Wrong Password');
+      }
+    }
+    function closeAdmin(){
+      adminPanel.style.display = 'none';
+    }
+
+    document.getElementById('adminLogoutBtn')?.addEventListener('click', () => closeAdmin());
+
+    // ======= SIMPLE LOCAL 'DB' USING localStorage ========
+    function getDB(){
+      return JSON.parse(localStorage.getItem('ggm_db') || '{"products": [], "orders": [], "notifications": []}');
+    }
+    function saveDB(db){
+      localStorage.setItem('ggm_db', JSON.stringify(db));
+    }
+
+    // ======= PRODUCTS ========
+    function generateId(prefix='p'){
+      return prefix + Date.now().toString(36) + Math.floor(Math.random()*1000).toString(36);
+    }
+
+    function addOrUpdateProduct(){
+      const id = document.getElementById('p_id').value.trim();
+      const name = document.getElementById('p_name').value.trim();
+      const category = document.getElementById('p_category').value;
+      const price = parseFloat(document.getElementById('p_price').value) || 0;
+      const stock = parseInt(document.getElementById('p_stock').value) || 0;
+      const image = document.getElementById('p_image').value.trim();
+      if(!name){ alert('Enter product name'); return; }
+
+      const db = getDB();
+      if(id){
+        // update
+        const idx = db.products.findIndex(p=>p.id===id);
+        if(idx>-1){
+          db.products[idx] = { id, name, category, price, stock, image };
+          saveDB(db);
+          renderProducts();
+          notify('Product updated: '+name);
+          clearProductForm();
+          return;
+        }
+      }
+      const newId = generateId();
+      db.products.unshift({ id:newId, name, category, price, stock, image });
+      saveDB(db);
+      renderProducts();
+      notify('Product added: '+name);
+      clearProductForm();
+    }
+
+    function deleteProduct(id){
+      const db = getDB();
+      db.products = db.products.filter(p=>p.id!==id);
+      saveDB(db);
+      renderProducts();
+      notify('Product deleted: '+id);
+    }
+
+    function editProduct(id){
+      const db = getDB();
+      const p = db.products.find(x=>x.id===id);
+      if(!p) return;
+      document.getElementById('p_id').value = p.id;
+      document.getElementById('p_name').value = p.name;
+      document.getElementById('p_category').value = p.category;
+      document.getElementById('p_price').value = p.price;
+      document.getElementById('p_stock').value = p.stock;
+      document.getElementById('p_image').value = p.image;
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function clearProductForm(){
+      ['p_id','p_name','p_category','p_price','p_stock','p_image'].forEach(id=>document.getElementById(id).value='');
+    }
+
+    function renderProducts(){
+      const db = getDB();
+      const list = document.getElementById('productList');
+      list.innerHTML = '';
+      if(db.products.length===0){ list.innerHTML = '<div style="opacity:0.8">No products. Add some from the form.</div>'; return; }
+      db.products.forEach(p => {
+        const el = document.createElement('div');
+        el.style.display='flex'; el.style.justifyContent='space-between'; el.style.alignItems='center'; el.style.background='#080808'; el.style.padding='8px'; el.style.borderRadius='6px';
+        el.innerHTML = `
+          <div style=\"display:flex; gap:12px; align-items:center;\"> 
+            <img src=\"${p.image||'https://via.placeholder.com/60?text=img'}\" style=\"width:60px;height:60px;object-fit:cover;border-radius:6px;\" />
+            <div>
+              <div style=\"font-weight:bold\">${p.name}</div>
+              <div style=\"font-size:13px;opacity:0.8\">${p.category} · ₹${p.price} · stock: ${p.stock}</div>
+            </div>
+          </div>
+          <div style=\"display:flex; gap:8px;\">
+            <button onclick=\"editProduct('${p.id}')\" style=\"padding:6px 8px;border-radius:6px;border:1px solid goldenrod;background:transparent;cursor:pointer;\">Edit</button>
+            <button onclick=\"deleteProduct('${p.id}')\" style=\"padding:6px 8px;border-radius:6px;background:#b30000;color:#fff;border:none;cursor:pointer;\">Delete</button>
+          </div>
+        `;
+        list.appendChild(el);
+      });
+
+      // Also render on main site (customer view categories)
+      renderCustomerProducts();
+    }
+
+    // ======= ORDERS ========
+    function addOrder(order){
+      const db = getDB();
+      db.orders.unshift(order);
+      saveDB(db);
+      renderOrders();
+      notify('New order: '+order.id+' by '+order.customer.name);
+    }
+
+    function renderOrders(){
+      const db = getDB();
+      const el = document.getElementById('ordersList');
+      el.innerHTML = '';
+      if(db.orders.length===0){ el.innerHTML = '<div style="opacity:0.8">No orders yet.</div>'; return; }
+      db.orders.forEach(o=>{
+        const box = document.createElement('div');
+        box.style.background='#080808'; box.style.padding='10px'; box.style.borderRadius='8px';
+        box.innerHTML = `
+          <div style=\"display:flex;justify-content:space-between;align-items:center;gap:12px;\">
+            <div>
+              <div style=\"font-weight:bold\">Order: ${o.id} · ₹${o.total.toFixed(2)}</div>
+              <div style=\"font-size:13px;opacity:0.85\">Customer: ${o.customer.name} · ${o.customer.mobile}</div>
+              <div style=\"font-size:13px;opacity:0.85\">Address: ${o.customer.address}</div>
+              <div style=\"margin-top:6px;\">Items: ${o.items.map(i=>i.name+' (x'+i.qty+')').join(', ')}</div>
+            </div>
+            <div style=\"display:flex;flex-direction:column;gap:6px;\">
+              <button onclick=\"markShipped('${o.id}')\" style=\"padding:6px 8px;border-radius:6px;background:goldenrod;border:none;cursor:pointer;\">Mark Shipped</button>
+              <button onclick=\"deleteOrder('${o.id}')\" style=\"padding:6px 8px;border-radius:6px;background:#b30000;border:none;color:#fff;cursor:pointer;\">Delete</button>
+            </div>
+          </div>
+        `;
+        el.appendChild(box);
+      });
+    }
+
+    function deleteOrder(id){
+      const db = getDB();
+      db.orders = db.orders.filter(o=>o.id!==id);
+      saveDB(db);
+      renderOrders();
+      notify('Order deleted: '+id);
+    }
+    function markShipped(id){
+      notify('Order marked shipped: '+id);
+      alert('Order '+id+' marked shipped (demo).');
+    }
+
+    // ======= NOTIFICATIONS ========
+    function notify(text){
+      const db = getDB();
+      const item = { id:generateId('n'), text, time: new Date().toISOString() };
+      db.notifications.unshift(item);
+      saveDB(db);
+      renderNotifications();
+    }
+    function renderNotifications(){
+      const db = getDB();
+      const el = document.getElementById('notifications');
+      el.innerHTML = db.notifications.length ? db.notifications.map(n=>`<div style=\"padding:6px 8px;background:#080808;border-radius:6px;margin-bottom:6px;\">${n.text} <div style=\"font-size:12px;opacity:0.7\">${new Date(n.time).toLocaleString()}</div></div>`).join('') : 'No notifications.';
+    }
+
+    // ======= CUSTOMER / CUSTOMER VIEW HELPERS ========
+    // Renders products under each category in the main site sections so customer sees updates instantly
+    function renderCustomerProducts(){
+      const db = getDB();
+      const mapping = { clothes: 'clothes', electronics: 'electronics', accessories: 'accessories' };
+      Object.keys(mapping).forEach(cat=>{
+        const container = document.getElementById(mapping[cat]);
+        if(!container) return;
+        // keep heading at top; remove old product list container if exists
+        let prodWrap = container.querySelector('.product-grid');
+        if(prodWrap) prodWrap.remove();
+        prodWrap = document.createElement('div');
+        prodWrap.className='product-grid';
+        prodWrap.style.display='grid';
+        prodWrap.style.gridTemplateColumns='repeat(auto-fill, minmax(180px,1fr))';
+        prodWrap.style.gap='12px';
+        prodWrap.style.marginTop='12px';
+
+        db.products.filter(p=>p.category===cat).forEach(p=>{
+          const card = document.createElement('div');
+          card.style.background='#0a0a0a'; card.style.padding='8px'; card.style.borderRadius='8px'; card.style.textAlign='center';
+          card.innerHTML = `
+            <img src=\"${p.image||'https://via.placeholder.com/160?text=Product'}\" style=\"width:100%;height:120px;object-fit:cover;border-radius:6px;\" />
+            <div style=\"font-weight:bold;margin-top:8px\">${p.name}</div>
+            <div style=\"opacity:0.85;margin-top:4px\">₹${p.price}</div>
+            <div style=\"display:flex;gap:8px;justify-content:center;margin-top:8px\">
+              <button onclick=\"addToCart('${p.id}')\" style=\"padding:6px 8px;border-radius:6px;background:goldenrod;border:none;cursor:pointer;\">Add to Cart</button>
+              <button onclick=\"buyNow('${p.id}')\" style=\"padding:6px 8px;border-radius:6px;background:#111;border:1px solid goldenrod;color:goldenrod;cursor:pointer;\">Buy Now</button>
+            </div>
+          `;
+          prodWrap.appendChild(card);
+        });
+        container.appendChild(prodWrap);
+      });
+    }
+
+    // ======= CART & BUY (customer functions) ========
+    function getCart(){ return JSON.parse(localStorage.getItem('ggm_cart') || '[]'); }
+    function saveCart(c){ localStorage.setItem('ggm_cart', JSON.stringify(c)); renderCartCount(); }
+    function addToCart(productId){
+      const db = getDB(); const p = db.products.find(x=>x.id===productId); if(!p){ alert('Product not found'); return; }
+      const cart = getCart();
+      const existing = cart.find(i=>i.id===productId);
+      if(existing) existing.qty += 1; else cart.push({ id: p.id, name: p.name, price: p.price, qty:1 });
+      saveCart(cart);
+      alert(p.name+' added to cart');
+    }
+    function buyNow(productId){
+      const db = getDB(); const p = db.products.find(x=>x.id===productId); if(!p){ alert('Product not found'); return; }
+      // open quick checkout modal
+      const customer = collectCustomerDetails();
+      if(!customer) return;
+      const order = { id: generateId('o'), items:[{ id:p.id, name:p.name, price:p.price, qty:1 }], total: p.price, customer };
+      addOrder(order);
+      alert('Order placed. Order id: '+order.id);
+    }
+
+    function collectCustomerDetails(){
+      const name = prompt('Enter your name'); if(!name) return null;
+      const mobile = prompt('Enter mobile number'); if(!mobile) return null;
+      const address = prompt('Enter delivery address'); if(!address) return null;
+      return { name, mobile, address };
+    }
+
+    // Simple cart checkout (not a full payment flow)
+    function checkoutCart(){
+      const cart = getCart(); if(cart.length===0){ alert('Cart is empty'); return; }
+      const customer = collectCustomerDetails(); if(!customer) return;
+      const total = cart.reduce((s,i)=>s + i.price * i.qty, 0);
+      const order = { id: generateId('o'), items:cart, total, customer };
+      addOrder(order);
+      localStorage.removeItem('ggm_cart'); renderCartCount();
+      alert('Order placed: '+order.id);
+    }
+
+    function renderCartCount(){
+      const c = getCart();
+      let badge = document.getElementById('cartCount');
+      if(!badge){
+        badge = document.createElement('span'); badge.id='cartCount'; badge.style.position='fixed'; badge.style.bottom='90px'; badge.style.right='20px'; badge.style.background='goldenrod'; badge.style.color='black'; badge.style.padding='6px 8px'; badge.style.borderRadius='20px'; badge.style.fontWeight='bold'; badge.style.zIndex='9998';
+        document.body.appendChild(badge);
+      }
+      badge.innerText = c.reduce((s,i)=>s+i.qty,0) || 0;
+    }
+
+    // ======= INITIAL LOAD ========
+    function loadAllData(){ renderProducts(); renderOrders(); renderNotifications(); renderCartCount(); }
+
+    // ======= SAMPLE FIREBASE / BACKEND INTEGRATION AREA ========
+    function initFirebase(){
+      /*
+      // Example (UNCOMMENT & paste your config to use Firebase realtime DB):
+      // import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js';
+      // import { getDatabase, ref, set, onValue } from 'https://www.gstatic.com/firebasejs/9.0.0/firebase-database.js';
+      const firebaseConfig = {
+        apiKey: "YOUR_API_KEY",
+        authDomain: "YOUR_AUTH_DOMAIN",
+        databaseURL: "YOUR_DB_URL",
+        projectId: "YOUR_PROJECT_ID",
+        storageBucket: "YOUR_BUCKET",
+        messagingSenderId: "...",
+        appId: "..."
+      };
+      // initializeApp(firebaseConfig);
+      // then replace localStorage reads/writes with DB reads/writes for persistence across devices
+      */
+    }
+
+    // run init
+    initFirebase();
+
+  </script>
+
+</body>
+</html>
